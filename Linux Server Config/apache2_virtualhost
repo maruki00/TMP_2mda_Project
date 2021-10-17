@@ -1,0 +1,19 @@
+#/usr/bin/bash 
+#
+#   if you are in local server 
+#   you can run this script to make a virtual host 
+#   or you can just use localhost/127.0.0.1 
+#
+
+SERVER_HOST="abdollah.com"
+FILE_PATH="/etc/apache2/sites-available"
+sudo touch $FILE_PATH/$SERVER_HOST.conf 
+    
+sudo echo "<VirtualHost *:80>
+   ServerAdmin admin@webserver2.com
+   ServerName webserver2.com
+   ServerAlias www.webserver2.com
+   DocumentRoot /var/www/webserver2.com/public_html
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>" >> $FILE_PATH/$SERVER_HOST.conf
