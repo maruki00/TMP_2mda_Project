@@ -2,14 +2,13 @@
 
 namespace API\SYSTEM;
 
-
 class Controller 
 {
     private $controller;
     private $action;
     private $params;
     private $data;
-
+    
     public function setController($controllerName){
         $this->controller  = $controllerName;
     }

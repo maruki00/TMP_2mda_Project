@@ -1,6 +1,7 @@
 <?php
 
 namespace API\SYSTEM;
+use API\CONROLLERS\Controller;
 
 class App{
     // for sigleton
@@ -82,14 +83,14 @@ class App{
             }
             if(!class_exists($class)){
                 $this->controller = "error";
-                $class = "API\\Contreollers\\errorController";
+                $class = "API\\CONROLLERS\\errorController";
                 $action = "notfound";
             }
             if(!method_exists($class,$action)){
                 $action = "notfound";
             }
 
-            $cls = $class;
+            $cls = new $class;
             $cls->setController($this->controller);
             $cls->setAction($this->action);
             $cls->setParams($this->params);
