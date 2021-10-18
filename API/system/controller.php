@@ -19,7 +19,8 @@ class Controller
         $this->params = $paramsList;
     }
     public function notfound(){
-        return "";
+        $msg = array("message"=>"Error Some Thing wrrong...");
+        echo json_encode($msg);
     }
     public function noviewfound(){
         return "";

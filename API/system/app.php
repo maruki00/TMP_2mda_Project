@@ -31,11 +31,11 @@ class App{
             if(preg_match("#^".$tmp."$#",$uri)){
                 if(strtolower(self::$method[$key]) == strtolower($_SERVER["REQUEST_METHOD"])){
                     $this->getParams($route,$uri);
-                    if(is_callable(self::$method[$key])){
-                        $this->callback = self::$method[$key];
+                    if(is_callable(self::$actions[$key])){
+                        $this->callback = self::$actions[$key];
                     }else{
-                        if(strpos(self::$method[$key],"@")){
-                            $tmp = explode("@",self::$method[$key]);
+                        if(strpos(self::$actions[$key],"@")){
+                            $tmp = explode("@",self::$actions[$key]);
                             if(is_array($tmp)){
                                 if(isset($tmp[0])&& !empty($tmp[0]))
                                     $this->controller = $tmp[0];
@@ -74,26 +74,26 @@ class App{
         return $uri;
     }
     public function run(){
-        if($this->callback!=null) call_user_func($this->callback);
-        else{
-            $class = "";
+        
+        if($this->callback!=null){ 
+            call_user_func($this->callback);//$this->callback);
+        }else{
             if(!empty($this->controller)){
-                $class = "API\\Contreollers".strtolwer($this->controller)."Controller";
+                $class = "API\\CONTROLLERS\\".strtolower($this->controller)."controller";
                 $action = $this->action;
             }
             if(!class_exists($class)){
                 $this->controller = "error";
-                $class = "API\\CONROLLERS\\errorController";
+                $class = "API\\CONTROLLERS\\errorcontroller";
                 $action = "notfound";
             }
             if(!method_exists($class,$action)){
                 $action = "notfound";
             }
-
             $cls = new $class;
             $cls->setController($this->controller);
-            $cls->setAction($this->action);
-            $cls->setParams($this->params);
+            $cls->setAction    ($this->action);
+            $cls->setParams    ($this->params);
             $cls->$action();
         }		 
     }

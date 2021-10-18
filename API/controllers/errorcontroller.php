@@ -1,8 +1,7 @@
 <?php
 
-namespace API\CONROLLERS;
-use API\SYSTEM\Controller 
-;
-class errorController extends Controller{
-
+namespace API\CONTROLLERS;
+use API\SYSTEM\Controller;
+class errorcontroller extends Controller{
+        
 }

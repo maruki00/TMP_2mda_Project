@@ -1,5 +1,14 @@
 <?php
 
+/*********************************************************************************
+*                           Author: Абдуллах Улахияне                            *
+*        File Name: /home/user/Desktop/project/API/system/autoloader.php         *
+*                    Creation Date: October 17, 2021 07:05 PM                    *
+*                    Last Updated: October 18, 2021 12:37 PM                     *
+*                              Source Language: php                              *
+*********************************************************************************/
+
+
 namespace API\SYSTEM;
 use API\SYSTEM\Autoloader;
 
@@ -10,16 +19,16 @@ class Autoloader{
             $class = str_replace("API\\SYSTEM\\","",$class);
             $class =strtolower($class);
             $class = __SYS__.DS.$class.'.php';
-        }else if(strpos($class,"Controller")){
-            $class = str_replace("API\\CONROLLERS\\","",$class);
+            
+        }else if(strpos($class,"controller")){
+            $class = str_replace("API\\CONTROLLERS\\","",$class);
             $class =strtolower($class);
             $class = __CTL__.DS.$class.'.php';
-        }else if(strpos($class,"Model")){
+        }else if(strpos($class,"model")){
             $class = str_replace("API\\MODELS\\","",$class);
             $class =strtolower($class);
             $class = __MDL__.DS.$class.'.php';
         }
-        //print $class."<br>";
         if(file_exists($class)){
         	require_once $class;
         }		

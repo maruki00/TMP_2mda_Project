@@ -1,4 +1,12 @@
 <?php
+/*********************************************************************************
+*                              Author: Abdullah Oulahyane                        *
+*           File Name: /home/user/Desktop/project/API/system/model.php           *
+*                    Creation Date: October 17, 2021 07:06 PM                    *
+*                    Last Updated: October 18, 2021 12:10 PM                     *
+*                              Source Language: php                              *
+*********************************************************************************/
+
 namespace API\SYSTEM;
 use \PDO;
 class Model
