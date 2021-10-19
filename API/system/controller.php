@@ -4,10 +4,10 @@ namespace API\SYSTEM;
 
 class Controller 
 {
-    private $controller;
-    private $action;
-    private $params;
-    private $data;
+    protected $controller;
+    protected $action;
+    protected $params;
+    protected $data;
     
     public function setController($controllerName){
         $this->controller  = $controllerName;
@@ -22,7 +22,5 @@ class Controller
         $msg = array("message"=>"Error Some Thing wrrong...");
         echo json_encode($msg);
     }
-    public function noviewfound(){
-        return "";
-    }
+    
 }

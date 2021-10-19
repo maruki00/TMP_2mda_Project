@@ -3,7 +3,7 @@
 namespace API\MODELS;
 use API\SYSTEM\Model;
 
-class usersModel extends Model{
+class usersmodel extends Model{
     public $id; 
     public $username;
     public $password;

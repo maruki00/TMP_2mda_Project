@@ -3,6 +3,7 @@
 namespace API\MODELS;
 use API\SYSTEM\Model;
 
+
 class postsmodel extends Model {
     public $id;
     public $post_body;
@@ -17,4 +18,5 @@ class postsmodel extends Model {
         "posted_date" => "DATA_TYPE_STR",
         "user_id" => "DATA_TYPE_STR"
     );
-);
+
+}

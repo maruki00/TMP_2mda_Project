@@ -11,9 +11,8 @@ namespace API\SYSTEM;
 use \PDO;
 class Model
 {
-	public static $cnx;
-	private static function connection()
-	{
+	private static $cnx;
+	private static function connection(){
 		if(static::$cnx == null){
 			try
 			{
@@ -22,8 +21,8 @@ class Model
 		}
 		return static::$cnx;
 	}
-	private function getColumns()
-	{
+
+	private function getColumns(){
 		$cols='';
 		foreach (static::$tableSchema as $column => $type) {			
 			if($this->$column!=null)
@@ -40,8 +39,7 @@ class Model
 		return trim($cols,',');
 	}
 
-	private function getValues()
-	{
+	private function getValues(){
 		$val ='';
 		foreach (static::$tableSchema as $column => $type) {
 			if($this->$column!=null)
@@ -60,29 +58,23 @@ class Model
 	private function filterTags($str){
 		return htmlentities(strip_tags(trim($str)));
 	}
-
-	public function create()
-	{
+	public function create(){
 		$sql = 'INSERT INTO '. static::$tableName . ' SET '. self::getColumns();
 		$stmt = self::connection()->prepare($sql);
-		var_dump($this->getValues());
 		return $stmt->execute($this->getValues());
 	}
-
 	public function update()
 	{
 		$sql = 'UPDATE '. static::$tableName . ' SET '. $this->getColumns() . ' WHERE '.static::$primaryKey . ' = ' . $this->{static::$primaryKey};
 		$stmt = self::connection()->prepare($sql);
 		return $stmt->execute($this->getValues());
 	}
-
 	public function delete()
 	{
 		$sql = 'DELETE FROM '. static::$tableName . ' WHERE '.static::$primaryKey . ' = ' . $this->{static::$primaryKey};
-		$stmt = self::connection()->prepare($sql);
-		$stmt->execute();
+		$stmt = self::connection()->query($sql);
+		return $stmt;
 	}
-
 	public function save($op){
 		switch ($op) {
 			case 'add':
@@ -98,7 +90,6 @@ class Model
 				return;
 		}
 	}
-
 	public static function all()
 	{
 		$sql = 'SELECT * FROM '.static::$tableName;
@@ -108,9 +99,7 @@ class Model
 			return is_array($res)?$res:false;
 		}
 	}
-
-	public static function find($pk)
-	{
+	public static function find($pk){
 		$sql = 'SELECT * FROM '.static::$tableName . ' WHERE '. static::$primaryKey . ' = ?';
 		$stmt = self::connection()->prepare($sql);
 		if($stmt->execute(array($pk)) === true )
@@ -120,9 +109,7 @@ class Model
 		} 
 		return false;
 	}
-
-	public static function first()
-	{
+	public static function first(){
 		$sql = 'SELECT * FROM '.static::$tableName . ' limit 1';
 		$stmt = $this->connection()->prepare($sql);
 		if($stmt->execute(array()) === true )
@@ -132,10 +119,9 @@ class Model
 		} 
 		return false;
 	}
-	public static function last()
-	{
-		$sql = 'SELECT * FROM '.static::$tableName . ' limit '.($this->count()-1)	.' , 1';
-		$stmt = $this->connection()->prepare($sql);
+	public static function last(){
+		$sql = 'SELECT * FROM '.static::$tableName . ' limit '.(self::count()-1)	.' , 1';
+		$stmt = self::connection()->prepare($sql);
 		if($stmt->execute(array()) === true )
 		{
 			$obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class(),null);
@@ -143,7 +129,6 @@ class Model
 		} 
 		return false;
 	}
-
 	public static function where(...$input)
 	{
 		$vals = array();
@@ -157,7 +142,6 @@ class Model
 			$sql .= ' WHERE '.$input[0]. ' '.$input[1] .' ? ';
 			array_push($vals, $input[2]);
 		}elseif ($size >= 7 && ($size - 3) % 4 == 0) {
-			
 			for($i=0;$i<$size;$i++)
 			{
 				if ($i===0) {
@@ -170,20 +154,18 @@ class Model
 					array_push($vals, $input[$i+3]);
 					$i=$i+3;
 				}
-			}
-			
+			}			
 		}else{
 			$sql .= ' WHERE 1 <> 1';
 		}
 		$stmt = self::connection()->prepare($sql);
 		if($stmt->execute($vals) === true){
 			$res = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class(),null); 
-			return is_array($res)?$res:false;
-		}
 			
+			return is_array($res)?$res:false;
+		}	
 	}
-	public static function count()
-	{
+	public static function count(){
 		$sql  = 'SELECT * FROM '.static::$tableName;
 		$stmt = self::connection()->prepare($sql);
 		$stmt->execute();
