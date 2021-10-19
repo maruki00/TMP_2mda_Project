@@ -1,10 +1,7 @@
 <?php
-
-
 namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\MODELS\usersmodel;
-
 class userscontroller extends Controller{
     private $user = null;
     public function register(){
@@ -12,7 +9,9 @@ class userscontroller extends Controller{
         $this->user->id = 1;
         $this->user->username = $this->params['username'];
         $this->user->password = $this->password($this->params['password']);
-        $this->user->accessToken = $this->generate_accessToken($this->user->username,$this->user->password);
+        $this->user->accessToken = $this->generate_accessToken( $this->user->id,
+                                                                $this->user->username,
+                                                                $this->user->password);
         $this->user->fullname = $this->params['fullname'];
         $this->user->address_email = $this->params['address_email'];
         $this->user->phone_number = $this->params['phone_number'];
@@ -31,27 +30,40 @@ class userscontroller extends Controller{
         if($this->user){
             echo json_encode($this->user);
         }else{
-            echo json_encode(array("message"=>"Failed to login"));
+            echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
     public function auth(){
-        $this->user = usersmodel::where("accesstoken","=",$this->params['token']);
-        $this->user->password="";
-        if($this->user){
-            echo json_encode($this->user);
+        if(static::isAuth($this->params['token'])){
+            $this->user = usersmodel::where("accesstoken","=",$this->params['token']);
+            $this->user->password="";
+            if($this->user){
+                echo json_encode($this->user);
+            }else{
+                echo json_encode(array("message"=>"Failed to auth"));
+            }
         }else{
-            echo json_encode(array("message"=>"Failed to auth"));
+            echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
     public function get(){
-        $this->user = usersmodel::where("username","=",$this->params['username']);
-        if($this->user){
-            echo json_encode($this->user);
+        if(static::isAuth($this->params['token'])){
+            $this->user = usersmodel::where("username","=",$this->params['username']);
+            if($this->user){
+                echo json_encode($this->user);
+            }else{
+                echo json_encode(array("message"=>"Failed to fetch this user"));
+            }
         }else{
-            echo json_encode(array("message"=>"Failed to fetch this user"));
+            echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
-    private function parseAccessToken($data){
+    public static function isAuth($token){
+        $user = usersmodel::where("accesstoken","=",$token);
+        if($user) return true;
+        else return false;    
+    }
+    public static function parseAccessToken($data){
         $method = "AES-256-CBC";
         $s_key = '2-mda-9';
         $s_iv = 'TMP-2-mda-9-pro';
@@ -64,8 +76,8 @@ class userscontroller extends Controller{
     private function password($data){
         return hash('sha256',$data);
     }
-    private function generate_accessToken($user,$pass){
-        $data = $user."%mda%".$pass;
+    private function generate_accessToken($id,$user,$pass){
+        $data = $id."%mda%".$user."%mda%".$pass;
         $method = "AES-256-CBC";
         $s_key = '2-mda-9';
         $s_iv = 'TMP-2-mda-9-pro';
@@ -73,8 +85,5 @@ class userscontroller extends Controller{
         $iv = substr(hash('sha256', $s_iv), 0, 16);
         $output = openssl_encrypt($data, $method, $key, 0, $iv);
         return $output;
-    }
-    private function check_accessToken(){
-        $this->user = new usersmodel();
     }
 }
