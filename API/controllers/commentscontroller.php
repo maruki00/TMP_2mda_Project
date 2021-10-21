@@ -4,7 +4,7 @@
 namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\MODELS\commentsmodel;
-use API\MODELS\usersmodel;
+use API\MODELS\userscontroller;
 
 class commentscontroller extends Controller{
     private $comment;
@@ -15,8 +15,8 @@ class commentscontroller extends Controller{
     //post_id
 
     public function add(){
-        if(usersmodel::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->comment=new commentsmodel();
             $this->comment->id = 1;
             $this->comment->comment_body = $this->params['comment_body'];
@@ -35,7 +35,7 @@ class commentscontroller extends Controller{
     }
 
     public function delete(){
-        if(usersmodel::isAuth($this->params['token'])){
+        if(userscontroller::isAuth($this->params['token'])){
             $this->comment=commentsmodel::where("id","=",$this->params['id']);
             $res = $this->comment->delete();
             if($res){
@@ -49,8 +49,8 @@ class commentscontroller extends Controller{
     }
 
     public function update(){
-        if(usersmodel::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->comment=new commentsmodel();
             $this->comment->id = $this->params['id'];
             $this->comment->comment_body = $this->params['comment_body'];
@@ -68,7 +68,7 @@ class commentscontroller extends Controller{
     }
 
     public function get(){
-        if(usersmodel::isAuth($this->params['token'])){
+        if(userscontroller::isAuth($this->params['token'])){
             $this->comment=commentsmodel::where('post_id','=',$this->params['post_id']);
             if($this->comment){
                 echo json_encode(array("Count" => count($this->comment)));

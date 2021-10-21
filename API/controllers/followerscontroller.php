@@ -4,13 +4,13 @@
 namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\MODELS\followersmodel;
-use API\MODELS\usersmodel;
+use API\CONTROLLERS\userscontroller;
 
 class followerscontroller extends Controller{
     private $follower;
     public function add(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->follow = new followersmodel();
             $this->follower->id                     = 1;
             $this->follower->follower_from_user_id  = $data[0]; 
@@ -26,8 +26,8 @@ class followerscontroller extends Controller{
         }
     }
     public function delete(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->follow = followersmodel::where("follower_from_user_id","=",$data[0],"and","followed_to_user_id","=",$this->params['followed_to_user_id']);
             $res = $this->follower->delete();
             if($res){

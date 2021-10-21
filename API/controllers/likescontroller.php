@@ -4,13 +4,13 @@
 namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\MODELS\likesmodel;
-use API\MODELS\usersmodel;
+use API\CONTROLLERS\userscontroller;
 
 class likescontroller extends Controller{
     private $like;
     public function add(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->like = new likesmodel();
             $this->like->id = 1;
             $this->like->user_id = $data[0];//$this->params['user_id']; 
@@ -26,8 +26,8 @@ class likescontroller extends Controller{
         }
     }
     public function delete(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->like =likesmodel::where('user_id','=',$data[0],"and",'post_id','=',$this->params['post_id']);
             $res = $this->like->delete();
             if($res){
@@ -40,7 +40,7 @@ class likescontroller extends Controller{
         }
     }
     public function count(){
-        if(static::isAuth($this->params['token'])){
+        if(userscontroller::isAuth($this->params['token'])){
             $this->like =likesmodel::where('post_id','=',$this->params['post_id']);
             if($res){
                 echo json_encode(count($res));

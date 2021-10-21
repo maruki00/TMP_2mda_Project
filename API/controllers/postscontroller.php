@@ -4,13 +4,13 @@
 namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\MODELS\postsmodel;
-use API\MODELS\usersmodel;
+use API\CONTROLLERS\userscontroller;
 
 class postscontroller extends Controller{
     private $post=null;
     public function add(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->post = new postsmodel();
             $this->post->id = 1;
             $this->post->post_body = $this->params['post_body'];
@@ -26,9 +26,8 @@ class postscontroller extends Controller{
             echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
-
     public function delete(){
-        if(static::isAuth($this->params['token'])){
+        if(userscontroller::isAuth($this->params['token'])){
             $this->post = new postsmodel();
             $this->post->id = $this->params['id'];
             $res = $this->post->delete();
@@ -41,10 +40,9 @@ class postscontroller extends Controller{
             echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
-
     public function update(){
-        if(static::isAuth($this->params['token'])){
-            $data = usersmodel::parseAccessToken($this->params['token']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $data = userscontroller::parseAccessToken($this->params['token']);
             $this->post = new postsmodel();
             $this->post->id =          $this->params['id'];
             $this->post->post_body =   $this->params['post_body'];
@@ -60,9 +58,8 @@ class postscontroller extends Controller{
             echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
-
     public function getById(){
-        if(static::isAuth($this->params['token'])){
+        if(userscontroller::isAuth($this->params['token'])){
             $this->post = postsmodel::where("id","=",$this->params['id']);
             if($this->post){
                 echo json_encode($this->post);
@@ -73,11 +70,9 @@ class postscontroller extends Controller{
             echo json_encode(array("message"=>"You are not allowed..."));
         }
     }
-    
-
     public function getAll(){
-        if(static::isAuth($this->params['token'])){
-            $this->post = postsmodel::where("user_id","=",$this->params['id']);
+        if(userscontroller::isAuth($this->params['token'])){
+            $this->post = postsmodel::where("user_id","=",$this->params['user_id']);
             if($this->post){
                 echo json_encode($this->post);
             }else{

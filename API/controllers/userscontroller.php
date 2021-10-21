@@ -49,6 +49,7 @@ class userscontroller extends Controller{
     public function get(){
         if(static::isAuth($this->params['token'])){
             $this->user = usersmodel::where("username","=",$this->params['username']);
+            echo$this->user->password;
             if($this->user){
                 echo json_encode($this->user);
             }else{

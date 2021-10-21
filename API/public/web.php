@@ -18,7 +18,7 @@ Router::GET("/post/add/{post_body}/{token}",                                    
 Router::GET("/post/delete/{id}/{token}",                                                        "posts@delete");
 Router::GET("/post/update/{id}/{post_body}/{token}",                                            "posts@update");
 Router::GET("/post/get/{id}/{token}",                                                           "posts@getById");
-Router::GET("/post/getall/{id}/{token}",                                                        "posts@getAll");
+Router::GET("/post/getall/{user_id}/{token}",                                                        "posts@getAll");
 
 //comments Routes
 Router::GET("/comment/add/{comment_body}/{post_id}/{token}",                                    "comments@add");
