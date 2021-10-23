@@ -1,0 +1,5 @@
+class likecontroller{
+  void home(){
+    
+  }
+}

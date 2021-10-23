@@ -1,0 +1,5 @@
+class postcontroller{
+  void home(){
+    
+  }
+}
