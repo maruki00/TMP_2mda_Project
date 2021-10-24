@@ -8,27 +8,28 @@
 *                    Last Updated: October 19, 2021 03:09 PM                     *
 *                              Source Language: php                              *
 *********************************************************************************/
-
+header('HTTP/1.0 403 Forbidden');
+die(json_encode(array('message' => "You are not allowed, 403 Forbidden.....")));
 //session_start();
-use API\SYSTEM\app;
-use API\MODELS\usersModel;
+//use API\SYSTEM\app;
+//use API\MODELS\usersModel;
 
 
-require_once "./config.php";
-require_once "../system/autoloader.php";
-require_once "web.php";
+//require_once "./config.php";
+//require_once "../system/autoloader.php";
+//require_once "web.php";
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET,POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-
+//header("Access-Control-Allow-Origin: *");
+//header("Content-Type: application/json; charset=UTF-8");
+//header("Access-Control-Allow-Methods: GET,POST");
+//header("Access-Control-Max-Age: 3600");
+//header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-$app = App::newApp();
-$app->run();
+
+
+//$app = App::newApp();
+//$app->run();
 
 
 
@@ -46,6 +47,5 @@ $app->run();
 //echo $stmt->execute($arr);
 //}catch(PDOException $err){ 
 //    echo "<br>=============================================<br>".$err.getMessage();}
-
 
 

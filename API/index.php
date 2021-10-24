@@ -14,9 +14,9 @@ use API\SYSTEM\app;
 use API\MODELS\usersModel;
 
 
-require_once "./config.php";
-require_once "../system/autoloader.php";
-require_once "web.php";
+require_once "public/config.php";
+require_once "system/autoloader.php";
+require_once "public/web.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

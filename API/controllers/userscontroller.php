@@ -36,9 +36,9 @@ class userscontroller extends Controller{
     public function auth(){
         if(static::isAuth($this->params['token'])){
             $this->user = usersmodel::where("accesstoken","=",$this->params['token']);
-            $this->user->password="";
             if($this->user){
-                echo json_encode($this->user);
+                $json = json_encode($this->user);
+                echo $json;
             }else{
                 echo json_encode(array("message"=>"Failed to auth"));
             }
@@ -49,7 +49,6 @@ class userscontroller extends Controller{
     public function get(){
         if(static::isAuth($this->params['token'])){
             $this->user = usersmodel::where("username","=",$this->params['username']);
-            echo$this->user->password;
             if($this->user){
                 echo json_encode($this->user);
             }else{
@@ -70,6 +69,7 @@ class userscontroller extends Controller{
         $s_iv = 'TMP-2-mda-9-pro';
         $key = hash('sha256', $s_key);
         $iv = substr(hash('sha256', $s_iv), 0, 16);
+        $data = base64_decode($data);
         $res = openssl_decrypt($data, $method, $key, 0, $iv);
         $res = explode("%mda%",$res);
         return $res;
@@ -85,6 +85,6 @@ class userscontroller extends Controller{
         $key = hash('sha256', $s_key);
         $iv = substr(hash('sha256', $s_iv), 0, 16);
         $output = openssl_encrypt($data, $method, $key, 0, $iv);
-        return $output;
+        return base64_encode($output);
     }
 }

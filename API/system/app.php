@@ -74,7 +74,7 @@ class App{
         return $uri;
     }
     public function run(){
-        
+        $class = "";
         if($this->callback!=null){ 
             call_user_func($this->callback);//$this->callback);
         }else{

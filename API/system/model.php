@@ -11,13 +11,13 @@ namespace API\SYSTEM;
 use \PDO;
 class Model
 {
-	private static $cnx;
+	protected static $cnx;
 	private static function connection(){
 		if(static::$cnx == null){
 			try
 			{
 				static::$cnx = new \PDO('mysql://hostname = '.DB_HOST.';dbname='.DB_NAME.';',DB_USER,DB_PASS);
-			}catch(PDOException $er){die('coulde not connect to database');}
+			}catch(\PDOException $er){die(json_encode(array("message"=> 'coulde not connect to database')));}
 		}
 		return static::$cnx;
 	}
