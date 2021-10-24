@@ -1,4 +1,4 @@
-class commentmodel{
+class comment{
   late var id;
   late var comment_body;
   late var commented_date;
