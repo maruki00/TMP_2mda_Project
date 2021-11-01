@@ -1,5 +1,0 @@
-class usercontroller{
-  void home(){
-    
-  }
-}

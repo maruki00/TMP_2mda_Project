@@ -1,5 +1,0 @@
-class commentcontroller{
-  void home(){
-    
-  }
-}
