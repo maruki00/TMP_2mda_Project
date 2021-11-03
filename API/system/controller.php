@@ -19,7 +19,7 @@ class Controller
         $this->params = $paramsList;
     }
     public function notfound(){
-        $msg = array("message"=>"Error Some Thing wrrong...");
+        $msg = array("Error"=>"Error Page Not Found...");
         echo json_encode($msg);
     }
     

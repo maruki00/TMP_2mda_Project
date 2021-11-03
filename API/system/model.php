@@ -17,7 +17,7 @@ class Model
 			try
 			{
 				static::$cnx = new \PDO('mysql://hostname = '.DB_HOST.';dbname='.DB_NAME.';',DB_USER,DB_PASS);
-			}catch(\PDOException $er){die(json_encode(array("message"=> 'coulde not connect to database')));}
+			}catch(\PDOException $er){die(json_encode(array("Error"=> 'coulde not connect to database')));}
 		}
 		return static::$cnx;
 	}
@@ -120,7 +120,7 @@ class Model
 		return false;
 	}
 	public static function last(){
-		$sql = 'SELECT * FROM '.static::$tableName . ' limit '.(self::count()-1)	.' , 1';
+		$sql = 'SELECT * FROM '.static::$tableName . ' limit '.((int)self::count()-1)	.' , 1';
 		$stmt = self::connection()->prepare($sql);
 		if($stmt->execute(array()) === true )
 		{
@@ -161,7 +161,6 @@ class Model
 		$stmt = self::connection()->prepare($sql);
 		if($stmt->execute($vals) === true){
 			$res = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class(),null); 
-			
 			return is_array($res)?$res:false;
 		}	
 	}

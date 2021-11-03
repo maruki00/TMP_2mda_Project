@@ -9,7 +9,7 @@
 *                              Source Language: php                              *
 *********************************************************************************/
 header('HTTP/1.0 403 Forbidden');
-die(json_encode(array('message' => "You are not allowed, 403 Forbidden.....")));
+die(json_encode(array('Error' => "You are not allowed, <br>403 Forbidden.....")));
 //session_start();
 //use API\SYSTEM\app;
 //use API\MODELS\usersModel;

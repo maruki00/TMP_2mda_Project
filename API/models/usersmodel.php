@@ -14,7 +14,6 @@ class usersmodel extends Model{
     public $last_access; 
     public $role;
 
-
     public static $tableName = "users";
     public static $primaryKey = "id";
     public static $tableSchema= array(

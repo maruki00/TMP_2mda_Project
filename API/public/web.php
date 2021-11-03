@@ -33,8 +33,8 @@ Router::GET("/like/count/{post_id}/{token}",                                    
 
 
 //follows Routes
-Router::GET("/follow/add/{followed_to_user_id}/{token}",                                        "followers@add");
-Router::GET("/follow/delete/{followed_to_user_id}/{token}",                                     "followers@delete");
+Router::GET("/follow/add/{followed_id}/{token}",                                        "followers@add");
+Router::GET("/follow/delete/{followed_id}/{token}",                                     "followers@delete");
 //
 
 
