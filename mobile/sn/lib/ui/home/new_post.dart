@@ -11,7 +11,8 @@ class Newpostpage extends StatefulWidget {
 class _NewpostpageState extends State<Newpostpage> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return SingleChildScrollView(
+        child: Column(children: [
       SizedBox(height: 30),
       Container(
           alignment: Alignment.centerLeft,
@@ -50,6 +51,6 @@ class _NewpostpageState extends State<Newpostpage> {
         height: 10,
       ),
       BottonUI(text: "add post", onpressed: () {})
-    ]);
+    ]));
   }
 }

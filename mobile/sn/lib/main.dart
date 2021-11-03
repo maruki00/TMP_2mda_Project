@@ -2,14 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:sn/ui/home/home.dart';
-import 'package:sn/ui/home/new_post.dart';
-import 'package:sn/ui/widget/bottombar.dart';
-import 'package:sn/ui/widget/navbar.dart';
-import 'package:sn/ui/widget/post.dart';
 import 'package:sn/ui/home/post.dart';
-import 'package:sn/ui/sign/in.dart';
-import 'package:sn/ui/sign/up.dart';
 
 void main(List<String> args) {
   runApp(MaterialApp(
@@ -22,7 +15,7 @@ class home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.black,
-      home: Loginpage(),
+      home: Postpage(),
     );
   }
 }

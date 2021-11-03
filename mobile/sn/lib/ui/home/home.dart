@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sn/ui/compenent/bottombar.dart';
 import 'package:sn/ui/home/feeds.dart';
 import 'package:sn/ui/home/new_post.dart';
+import 'package:sn/ui/home/post.dart';
 import 'package:sn/ui/home/profile.dart';
 import 'package:sn/ui/sign/in.dart';
 import 'package:sn/ui/sign/up.dart';
@@ -35,6 +36,7 @@ class _HomepageState extends State<Homepage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
+                color: Colors.black54,
                 onPressed: () {
                   setState(() {
                     wgt = Feeds();
@@ -42,26 +44,39 @@ class _HomepageState extends State<Homepage> {
                 },
                 icon: Icon(Icons.home_outlined)),
             IconButton(
+                color: Colors.black54,
                 onPressed: () {
                   setState(() {
-                    wgt = Loginpage();
+                    wgt = Postpage();
                   });
                 },
-                icon: Icon(Icons.message_sharp)),
-            IconButton(
-              padding: EdgeInsets.only(bottom: 20),
-              highlightColor: Colors.pink,
-              iconSize: 50,
-              focusColor: Colors.amberAccent,
+                icon: Icon(Icons.mail_outline)),
+            FloatingActionButton(
+              tooltip: "Add new post",
+              child: Icon(Icons.add),
               onPressed: () {
                 setState(() {
                   wgt = Newpostpage();
                 });
               },
-              icon: Icon(Icons.add),
-              color: Colors.pink,
+              backgroundColor: Colors.pink,
+              focusColor: Colors.black,
             ),
+            //IconButton(
+            //  padding: EdgeInsets.only(bottom: 20),
+            //  highlightColor: Colors.pink,
+            //  iconSize: 50,
+            //  focusColor: Colors.amberAccent,
+            //  onPressed: () {
+            //    setState(() {
+            //      wgt = Newpostpage();
+            //    });
+            //  },
+            //  icon: Icon(Icons.add),
+            //  color: Colors.pink,
+            //),
             IconButton(
+                color: Colors.black54,
                 onPressed: () {
                   setState(() {
                     wgt = Registerpage();
@@ -69,6 +84,7 @@ class _HomepageState extends State<Homepage> {
                 },
                 icon: Icon(Icons.search_sharp)),
             IconButton(
+                color: Colors.black54,
                 onPressed: () {
                   setState(() {
                     wgt = Profilepage();

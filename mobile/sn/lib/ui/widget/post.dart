@@ -29,7 +29,8 @@ class _PostUIState extends State<PostUI> {
                       },
                       title: "title",
                       subtitle: "subtitle"),
-                  Text("akjjjjjjjjjjgdssssshadlfkadsfiayteoiu"),
+                  Text(
+                      "akjjjjjjjjjjgdssssshadlfkadsfiayteoiukjdshflaksdhflkjsadhlfakjshflkjsahflakjshfdlkjsadfljsahkjashglkjshglkjsahglkjsahkjsahgkjsahglakjshtluewhlkjnvmxcnv.Z,mx?NVLKd;GF.kDNV>z,MNV.<zjVkjzdHF;kjads"),
                   SizedBox(
                     height: 10,
                   ),

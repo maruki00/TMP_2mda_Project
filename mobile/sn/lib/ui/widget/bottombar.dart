@@ -18,16 +18,22 @@ class _BottombarUIState extends State<BottombarUI> {
         children: [
           IconButton(onPressed: () {}, icon: Icon(Icons.home_outlined)),
           IconButton(onPressed: () {}, icon: Icon(Icons.message_sharp)),
-          IconButton(
-            padding: EdgeInsets.only(bottom: 20),
-            highlightColor: Colors.pink,
-            iconSize: 50,
-            focusColor: Colors.amberAccent,
+          FloatingActionButton(
+            child: Icon(Icons.add),
             onPressed: () {},
-            icon: Icon(Icons.add),
-            color: Colors.pink,
+            backgroundColor: Colors.black, //.pink[400],
+            focusColor: Colors.black,
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
+          //IconButton(
+          //  padding: EdgeInsets.only(bottom: 20),
+          //  highlightColor: Colors.pink,
+          //  iconSize: 50,
+          //  focusColor: Colors.amberAccent,
+          //  onPressed: () {},
+          //  icon: Icon(Icons.add),
+          //  color: Colors.pink,
+          //),
+          //IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
           IconButton(
               onPressed: () {}, icon: Icon(Icons.manage_accounts_outlined)),
         ],

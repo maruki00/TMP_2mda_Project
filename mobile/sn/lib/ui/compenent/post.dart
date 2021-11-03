@@ -6,24 +6,26 @@ class Postcompenent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //alignment: Alignment.centerLeft,
+    return Center(
+        child: Container(
+      alignment: Alignment.center,
       child: child,
       //height: ,
       width: MediaQuery.of(context).size.width * 0.95,
       padding: EdgeInsets.all(0),
       margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(15),
           color: Color(0xFFFFFFFF),
           border: Border.all(color: Colors.grey.shade300, width: 0.3),
           boxShadow: [
             BoxShadow(
-                //blurRadius: 0.1,
-                offset: Offset(0, 2),
-                color: Colors.brown.shade50,
-                spreadRadius: 0.1)
+              //blurRadius: 0.1,
+              offset: Offset(0, 2),
+              color: Colors.brown.shade50,
+              //spreadRadius: 0.1
+            )
           ]),
-    );
+    ));
   }
 }

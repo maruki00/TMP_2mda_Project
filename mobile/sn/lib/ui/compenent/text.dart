@@ -11,7 +11,7 @@ class Textcompenent extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 0.75,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           border: Border.all(
