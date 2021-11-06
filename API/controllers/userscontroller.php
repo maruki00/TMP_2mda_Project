@@ -7,8 +7,8 @@ class userscontroller extends Controller{
     private $user = null;
     public function register(){
         $this->user = usersmodel::last();
-        if(!this->user){
-            $this->user = new userModel();
+        if(!$this->user){
+            $this->user = new usersmodel();
             $this->user->id = 1;
         }
         $this->user->id = 1;//usersmodel::last()->id?(int)usersmodel::last()->id+1:1;
@@ -22,7 +22,7 @@ class userscontroller extends Controller{
         $this->user->phone_number = $this->params['phone_number'];
         $this->user->last_access = date("d/m/Y");
         $this->user->role = 1;
-        $res = $this->user->create();                                             
+        $res = $this->user->create();
         if($res){
             echo json_encode(array("accesstoken"=>$this->user->accessToken));
         }else{
@@ -46,7 +46,7 @@ class userscontroller extends Controller{
         }
     }
     public function profile(){
-        $this->user = usersmodel::where("accesstoken","=",$this->params['token']));
+        $this->user = usersmodel::where("accesstoken","=",$this->params['token']);
         if($this->user){
                echo json_encode(array(
                     "id"=>           $this->user[0]->id,
@@ -103,3 +103,7 @@ class userscontroller extends Controller{
     }
     
 }
+
+
+
+
