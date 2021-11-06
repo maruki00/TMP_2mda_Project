@@ -9,6 +9,7 @@ Router::GET("/test/{token}/{id}/{name}/",function(){
 
 //users Routes 
 Router::GET("/user/register/{username}/{password}/{fullname}/{address_email}/{phone_number}",   "users@register");
+Router::GET("/user/profile/{token}",                                                            "users@profile");
 Router::GET("/user/login/{username}/{password}",                                                "users@login");
 Router::GET("/user/auth/{token}",                                                               "users@auth");
 Router::GET("/user/get/{username}/{token}",                                                     "users@get"    );
