@@ -1,9 +1,10 @@
 import "package:sn/models/comment.dart";
 import "package:sn/models/like.dart";
-class postmodel{
+
+class Postmodel {
   late var id;
-  late var post_body;
-  late var posted_date;
-  late List<comment> commets;
-  late List<like> likes;
+  late var postbody;
+  late var posteddate;
+  late List<Comment> commets;
+  late List<Like> likes;
 }

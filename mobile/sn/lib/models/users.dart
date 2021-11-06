@@ -1,14 +1,14 @@
 import 'package:sn/models/follower.dart';
 
-class user{
+class User {
   late var id;
   late var username;
   late var password;
   late var accessToken;
   late var fullname;
-  late var address_email;
-  late var phone_number;
-  late var last_access;
+  late var addressemail;
+  late var phonenumber;
+  late var lastaccess;
   late var role;
-  late List<follower> followers;
+  late List<Follower> followers;
 }

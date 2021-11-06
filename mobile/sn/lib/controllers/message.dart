@@ -1,5 +1,3 @@
-class messagecontroller{
-  void home(){
-    
-  }
+class Messagecontroller {
+  void home() {}
 }

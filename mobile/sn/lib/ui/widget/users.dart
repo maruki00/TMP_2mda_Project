@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sn/ui/compenent/users.dart';
+import 'package:sn/ui/pages/messagepage.dart';
 
 class UsersnavUI extends StatefulWidget {
   const UsersnavUI({Key? key}) : super(key: key);
@@ -20,14 +21,21 @@ class _UsersnavUIState extends State<UsersnavUI> {
                 height: 70,
                 color: Colors.white,
                 padding: EdgeInsets.all(2),
-                child: CircleAvatar(
-                    backgroundColor: Colors.pink[50],
-                    child: ClipOval(
-                        child: Image(
-                      height: 70,
-                      width: 70,
-                      image: AssetImage("assets/images/main_lg.png"),
-                    ))));
+                child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Messagepage()));
+                    },
+                    child: CircleAvatar(
+                        backgroundColor: Colors.pink[50],
+                        child: ClipOval(
+                            child: Image(
+                          height: 70,
+                          width: 70,
+                          image: AssetImage("assets/images/main_lg.png"),
+                        )))));
           }),
     );
   }

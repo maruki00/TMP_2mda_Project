@@ -1,5 +1,5 @@
-class like{
+class Like {
   late var id;
-  late var user_id;
-  late var post_id;
+  late var userid;
+  late var postid;
 }

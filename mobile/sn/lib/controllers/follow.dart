@@ -1,5 +1,3 @@
-class followcontroller{
-  void home(){
-    
-  }
+class Followcontroller {
+  void home() {}
 }

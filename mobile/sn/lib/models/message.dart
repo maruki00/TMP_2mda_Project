@@ -1,7 +1,7 @@
-class message{
+class Message {
   late var id;
   late var msg;
-  late var messaged_date;
-  late var user_id_from;
-  late var user_id_to;
+  late var messageddate;
+  late var useridfrom;
+  late var useridto;
 }

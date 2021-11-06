@@ -1,5 +1,3 @@
-class usercontroller{
-  void home(){
-    
-  }
+class Usercontroller {
+  void home() {}
 }

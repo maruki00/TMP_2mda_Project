@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:sn/ui/home/home.dart';
+import 'package:sn/ui/pages/home.dart';
 import 'package:sn/ui/sign/up.dart';
 import 'package:sn/ui/widget/botton.dart';
 import 'package:sn/ui/widget/input_ui.dart';

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sn/ui/compenent/post.dart';
+import 'package:sn/ui/compenent/post_text.dart';
+import 'package:sn/ui/pages/post.dart';
+import 'package:sn/ui/pages/user.dart';
 import 'package:sn/ui/widget/user_title.dart';
 
 class PostUI extends StatefulWidget {
@@ -25,14 +28,16 @@ class _PostUIState extends State<PostUI> {
                   Userheader(
                       image: AssetImage("assets/images/main_lg.png"),
                       ontap: () {
-                        print("tapped");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Userpage()));
                       },
                       title: "title",
                       subtitle: "subtitle"),
-                  Text(
-                      "akjjjjjjjjjjgdssssshadlfkadsfiayteoiukjdshflaksdhflkjsadhlfakjshflkjsahflakjshfdlkjsadfljsahkjashglkjshglkjsahglkjsahkjsahgkjsahglakjshtluewhlkjnvmxcnv.Z,mx?NVLKd;GF.kDNV>z,MNV.<zjVkjzdHF;kjads"),
-                  SizedBox(
-                    height: 10,
+                  PostTextcompenent(
+                    child: Text(
+                        "kjhlaksjd hglkjdshlkjs hflkjshf lkjs flkjsa hfdlkjsa hfdkjasd fkjsadf jksahdfkjashdfkjsdf ksadhf kjsad fsad fncv.xmcvnmx vKJZ dfkhsa dfkj .dkjh "),
                   ),
                   Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -52,7 +57,12 @@ class _PostUIState extends State<PostUI> {
                                 fontSize: 10, fontWeight: FontWeight.w600),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Postpage()));
+                            },
                             icon: Icon(Icons.comment),
                             iconSize: 20,
                             padding: EdgeInsets.zero,

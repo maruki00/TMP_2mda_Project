@@ -1,5 +1,3 @@
-class commentcontroller{
-  void home(){
-    
-  }
+class Commentcontroller {
+  void home() {}
 }

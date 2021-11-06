@@ -1,5 +1,3 @@
-class likecontroller{
-  void home(){
-    
-  }
+class Likecontroller {
+  void home() {}
 }

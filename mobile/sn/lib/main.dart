@@ -1,21 +1,17 @@
-import 'dart:ui';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:sn/ui/home/post.dart';
+import 'package:sn/ui/sign/in.dart';
 
 void main(List<String> args) {
-  runApp(MaterialApp(
-    home: home(),
-  ));
+  runApp(MaterialApp(home: Home() //Home(),
+      ));
 }
 
-class home extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.black,
-      home: Postpage(),
+      home: Loginpage(),
     );
   }
 }
