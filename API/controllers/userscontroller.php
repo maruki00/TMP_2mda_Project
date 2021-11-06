@@ -6,25 +6,23 @@ use API\SYSTEM\Helper;
 class userscontroller extends Controller{
     private $user = null;
     public function register(){
-        $this->user = new usersmodel;
+        $this->user = usersmodel::last();
+        if(!this->user){
+            $this->user = new userModel();
+            $this->user->id = 1;
+        }
         $this->user->id = 1;//usersmodel::last()->id?(int)usersmodel::last()->id+1:1;
         $this->user->username = $this->params['username'];
         $this->user->password = Helper::password($this->params['password']);
-        $this->user->accessToken = "accestoken";
-        //                                                         Helper::generate_accessToken( $this->user->id,
-        //                                                        $this->user->username,
-        //                                                        $this->user->password);
+        $this->user->accessToken = Helper::generate_accessToken($this->user->id,
+                                                                $this->user->username,
+                                                                $this->user->password);
         $this->user->fullname = $this->params['fullname'];
         $this->user->address_email = $this->params['address_email'];
         $this->user->phone_number = $this->params['phone_number'];
         $this->user->last_access = date("d/m/Y");
         $this->user->role = 1;
-        $res = $this->user->create();
-        $this->user = usersmodel::last();
-        $this->user->accessToken = Helper::generate_accessToken($this->user->id,
-                                                                   $this->user->username,
-                                                                   $this->user->password);        
-        $this->user->update();                                                   
+        $res = $this->user->create();                                             
         if($res){
             echo json_encode(array("accesstoken"=>$this->user->accessToken));
         }else{
@@ -42,6 +40,20 @@ class userscontroller extends Controller{
                     //"address_email"=>$this->user[0]->address_email,
                     //"phone_number"=> $this->user[0]->phone_number,
 
+                )); 
+        }else{
+            echo json_encode(array("Error"=>"You are not allowed..."));
+        }
+    }
+    public function profile(){
+        $this->user = usersmodel::where("accesstoken","=",$this->params['token']));
+        if($this->user){
+               echo json_encode(array(
+                    "id"=>           $this->user[0]->id,
+                    "username"=>     $this->user[0]->username,
+                    "fullname"=>     $this->user[0]->fullname,
+                    "address_email"=>$this->user[0]->address_email,
+                    "phone_number"=> $this->user[0]->phone_number
                 )); 
         }else{
             echo json_encode(array("Error"=>"You are not allowed..."));
