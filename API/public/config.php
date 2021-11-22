@@ -5,6 +5,7 @@
 !defined("__SYS__")?define("__SYS__",realpath(__DIR__).DS.'..'.DS.'system',true):null;
 !defined("__CTL__")?define("__CTL__",realpath(__DIR__).DS.'..'.DS.'controllers',true):null;
 !defined("__MDL__")?define("__MDL__",realpath(__DIR__).DS.'..'.DS.'models',true):null;
+!defined("__IMG__")?define("__IMG__",realpath(__DIR__).DS.'..'.DS.'images',true):null;
 
 
 

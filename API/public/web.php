@@ -8,29 +8,37 @@ Router::GET("/test/{token}/{id}/{name}/",function(){
 });
 
 //users Routes 
-Router::GET("/user/register/{username}/{password}/{fullname}/{address_email}/{phone_number}",   "users@register");
-Router::GET("/user/profile/{token}",                                                            "users@profile");
-Router::GET("/user/login/{username}/{password}",                                                "users@login");
-Router::GET("/user/auth/{token}",                                                               "users@auth");
-Router::GET("/user/get/{username}/{token}",                                                     "users@get"    );
+Router::POST("/user/register",   "users@register");
+Router::POST("/user/login",                                                "users@login");
+Router::POST("/user/auth",                                                               "users@auth");
+Router::POST("/user/get",                                                     "users@get"    );
+Router::POST("/user/followers",                                                     "users@followers"    );
+Router::POST("/user/search",                                                     "users@search"    );
 
 //posts Routes
-Router::GET("/post/add/{post_body}/{token}",                                                    "posts@add");
+Router::POST("/post/add",                                                    "posts@add");
 Router::GET("/post/delete/{id}/{token}",                                                        "posts@delete");
 Router::GET("/post/update/{id}/{post_body}/{token}",                                            "posts@update");
-Router::GET("/post/get/{id}/{token}",                                                           "posts@getById");
-Router::GET("/post/getall/{user_id}/{token}",                                                        "posts@getAll");
+Router::POST("/post/get",                                                             "posts@getById");
+//Router::GET("/post/getall/{user_id}/{token}",                                                   "posts@getAll");
+Router::POST("/post/feeds",                                                                     "posts@feeds");
 
 //comments Routes
-Router::GET("/comment/add/{comment_body}/{post_id}/{token}",                                    "comments@add");
-Router::GET("/comment/delete/{id}/{token}",                                                     "comments@delete");
-Router::GET("/comment/update/{id}/{comment_body}/{post_id}/{token}",                            "comments@update");
-Router::GET("/comment/get/{post_id}/{token}",                                                   "comments@get");
+Router::POST("/comment/add",                                    "comments@add");
+Router::POST("/comment/delete",                                                     "comments@delete");
+Router::POST("/comment/get",                                                   "comments@get");
+
+
+//messages routes
+Router::POST("/message/add",                                                      "messages@add");
+Router::POST("/message/get",                                                      "messages@get");
+Router::POST("/message/getall",                                                   "messages@getall");
+
 
 //likes Routes
-Router::GET("/like/add/{post_id}/{token}",                                                      "likes@add");
-Router::GET("/like/delete/{post_id}/{token}",                                                   "likes@delete");
-Router::GET("/like/count/{post_id}/{token}",                                                    "likes@count");
+Router::POST("/like/add",                                                      "likes@add");
+Router::POST("/like/delete",                                                   "likes@delete");
+//Router::GET("/like/count/{post_id}/{token}",                                                    "likes@count");
 
 
 //follows Routes
