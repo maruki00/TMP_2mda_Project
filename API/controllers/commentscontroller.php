@@ -5,7 +5,8 @@ namespace API\CONTROLLERS;
 use API\SYSTEM\Controller;
 use API\SYSTEM\Helper;
 use API\MODELS\commentsmodel;
-use API\MODELS\userscontroller;
+use API\CONTROLLERS\userscontroller;
+
 
 class commentscontroller extends Controller{
     private $comment;
@@ -16,69 +17,65 @@ class commentscontroller extends Controller{
     //post_id
 
     public function add(){
-        if(userscontroller::isAuth($this->params['token'])){
-            $data = Helper::parseAccessToken($this->params['token']);
-            $this->comment=new commentsmodel();
-            $this->comment->id = 1;
-            $this->comment->comment_body = $this->params['comment_body'];
-            $this->comment->commented_date = date('d/m/Y');
-            $this->comment->user_id = $data[0];
-            $this->comment->post_id = $this->params['post_id'];
-            $res = $this->comment->create();
-            if($res){
-                echo json_encode(array("Error"=>"Comment Added Successfully"));
+        if(isset($_POST['token'])&&isset($_POST['body'])&&isset($_POST['post_id'])){
+            if(userscontroller::isAuth($_POST['token'])){
+                $data = Helper::parseAccessToken($_POST['token']);
+                $this->comment=new commentsmodel();
+                $this->comment->id = 1;
+                $this->comment->comment_body = $_POST['body'];
+                $this->comment->commented_date = Helper::now();
+                $this->comment->user_id = $data[0];
+                $this->comment->post_id = $_POST['post_id'];
+                $res = $this->comment->create();
+                if($res){
+                    echo json_encode(array("Success"=>"Comment Added Successfully"));
+                }else{
+                    echo json_encode(array("Error"=>"Failed to Add Comment"));
+                }
             }else{
-                echo json_encode(array("Error"=>"Failed to Add Comment"));
+                echo json_encode(array("Error"=>"You are not allowed..."));
             }
         }else{
-            echo json_encode(array("Error"=>"You are not allowed..."));
-        }
+                    echo json_encode(array("Error"=>"Invalide Data..."));
+                }
     }
-
     public function delete(){
-        if(userscontroller::isAuth($this->params['token'])){
-            $this->comment=commentsmodel::where("id","=",$this->params['id']);
-            $res = $this->comment->delete();
-            if($res){
-                echo json_encode(array("Error"=>"Comment Deleted Successfully"));
+        if(isset($_POST['token'])&&isset($_POST['comment_id'])&&isset($_POST['post_id'])){
+            if(userscontroller::isAuth($_POST['token'])){
+                $data = Helper::parseAccessToken($_POST['token']);
+                $this->comment=commentsmodel::where('id','=',$_POST['comment_id'],'and','post_id','=',$_POST['post_id']);
+                $res = is_array($res)?array_shift($res):$res;
+                if($res){
+                    $res->delete();
+                    echo json_encode(array("Success"=>"Comment Added Successfully"));
+                }else{
+                    echo json_encode(array("Error"=>"Failed to Add Comment"));
+                }
             }else{
-                echo json_encode(array("Error"=>"Failed to Deleted Comment"));
+                echo json_encode(array("Error"=>"You are not allowed..."));
             }
         }else{
-            echo json_encode(array("Error"=>"You are not allowed..."));
-        }
+                    echo json_encode(array("Error"=>"Invalide Data..."));
+                }
     }
-
-    public function update(){
-        if(userscontroller::isAuth($this->params['token'])){
-            $data = Helper::parseAccessToken($this->params['token']);
-            $this->comment=new commentsmodel();
-            $this->comment->id = $this->params['id'];
-            $this->comment->comment_body = $this->params['comment_body'];
-            $this->comment->user_id = $user[0];
-            $this->comment->post_id = $this->params['post_id'];
-            $res = $this->comment->update();
-            if($res){
-                echo json_encode(array("Error"=>"Comment Updated Successfully"));
-            }else{
-                echo json_encode(array("Error"=>"Failed to Updated Comment"));
-            }
-        }else{
-            echo json_encode(array("Error"=>"You are not allowed..."));
-        }
-    }
+//$comments =   commentsmodel::exec("select id,comment_body,commented_date,(select fullname from users where id=c.user_id) as user,(select imagepath from users where id=c.user_id) as userimage from comments c where post_id=".$_POST['id']);
 
     public function get(){
-        if(userscontroller::isAuth($this->params['token'])){
-            $this->comment=commentsmodel::where('post_id','=',$this->params['post_id']);
-            if($this->comment){
-                echo json_encode(array("Count" => count($this->comment)));
+        if(isset($_POST['token'])&&isset($_POST['post_id'])){
+            if(userscontroller::isAuth($_POST['token'])){
+                $this->comment=commentsmodel::exec("select *,(select fullname from users where id=c.user_id) as user,(select imagepath from users where id=c.user_id) as userimage from comments c where c.post_id=".$_POST['post_id']);
+                if($this->comment){
+                    echo json_encode($this->comment);
+                }else{
+                    echo json_encode(array("Error"=>"Failed to fetch Comments"));
+                }
             }else{
-                echo json_encode(array("Error"=>"Failed to Updated Comment"));
+                echo json_encode(array("Error"=>"You are not allowed..."));
             }
         }else{
-            echo json_encode(array("Error"=>"You are not allowed..."));
+            echo json_encode(array("Error"=>"Invalide data..."));
         }
+    
     }
 
     
