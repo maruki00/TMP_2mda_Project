@@ -1,3 +1,0 @@
-class Messagecontroller {
-  void home() {}
-}
