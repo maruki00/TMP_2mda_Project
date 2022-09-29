@@ -40,20 +40,20 @@ class Model
 	}
 
 	private function getValues(){
-		$val ='';
+		$val =[];
 		foreach (static::$tableSchema as $column => $type) {
 			if($this->$column!=null)
 			{
 				if($column === static::$primaryKey){
 					if($this->id === null){
-						$val .= $this->filterTags($this->$column).",";
+						$val []= $this->filterTags($this->$column); //.",";
 					}
 				}else{
-					$val .= $this->filterTags($this->$column) .",";
+					$val []= $this->filterTags($this->$column);// .",";
 				}
 			}
 		}
-		return explode(',',trim($val,','));
+		return $val;//explode(',',trim($val,','));
 	}
 	private function filterTags($str){
 		return htmlentities(strip_tags(trim($str)));
